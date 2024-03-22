@@ -6,7 +6,7 @@ sort_person = False
 def min_to_seconds(a):
     a = str(a)
     new_prest = a
-    if ":" in a:
+    if ":" in new_prest:
         sp = a.split(':')
         if len(sp) >= 3:
             h = int(sp[-3])
@@ -15,12 +15,27 @@ def min_to_seconds(a):
 
         m = int(sp[-2])
         s = float(sp[-1])
-        a = h*60 + m*60 + s
+        a_val = h*60 + m*60 + s
         h_pre = f"{h}:" if h > 0 else ""
-        m_pre = f"{m:02}:" if h > 0 or m > 0 else ""
-        new_prest = f"{h_pre}{m_pre}{s:02}"
+        # print(f"m is: {m} {m:02}")
+        if h > 0:
+            m_pre = f"{m:02}:"
+        elif m > 0:
+            m_pre = f"{m}:"
+        else:
+            m_pre = ""
 
-    return float(a), new_prest
+        # s_pre = trunc(s)
+        # fr = s % 1
+
+        new_prest = f"{h_pre}{m_pre}{s:05.2f}"
+        # new_prest = new_prest.removesuffix("0")
+    else:
+        a_val = a
+
+    
+
+    return float(a_val), new_prest
 
 
 def load_records():
